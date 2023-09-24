@@ -8,10 +8,12 @@ services:
       - POSTGRES_USER=${DB_USER}
       - POSTGRES_PASSWORD=${DB_PASS}
       - POSTGRES_DB=${DB_DATABASE}
+      - LANG=en_US.utf8
+      - LC_ALL=en_US.utf8
     container_name: db_employee
     volumes:
       - ./db_proyect:/docker-entrypoint-initdb.d
-      - /var/lib/postgres_data:/var/lib/postgresql/data:rw
+      - ./db_proyect/pg_data:/var/lib/postgresql/data:rw
     ports:
       - "5432:5432"
   db_manager:
@@ -42,4 +44,3 @@ services:
       - db_employee
     ports:
       - "3000:3000"  
-  
