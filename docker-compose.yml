@@ -21,7 +21,7 @@ services:
       PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-pgadmin4@pgadmin.org}
       PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-admin}
     volumes:
-      - ./db/db_manager:/root/.pgadmin
+      - ./db_proyect/db_manager:/root/.pgadmin
     ports:
       - '${PGADMIN_PORT:-5050}:80'
     depends_on:
@@ -31,23 +31,13 @@ services:
     build: 
       context: ./proyect-employee
       dockerfile: Dockerfile
-    environment:
-      - POSTGRES_USER=${DB_USER}
-      - POSTGRES_PASSWORD=${DB_PASS}
-      - POSTGRES_DB=${DB_DATABASE}
-      - DB_PORT=${DB_PORT}
-      - JWT_EXPIRE=${JWT_EXPIRE}
-      - JWT_SECRET=${JWT_SECRET}
-      - PAGE_NUMBER=${PAGE_NUMBER}
-      - PAGE_SIZE=${PAGE_SIZE}
-      - USER_ADMIN=${USER_ADMIN}
-      - PASS_ADMIN=${PASS_ADMIN}
+    env_file:
+      - .env
 
     container_name: app_publication
     volumes:
-      - .:/usr/src
+      - ./proyect-employee/.:/usr/src
       - /usr/src/node_modules
-    command: npm run start:dev
     depends_on:
       - db_employee
     ports:
