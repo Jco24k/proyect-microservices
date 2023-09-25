@@ -86,5 +86,5 @@ networks:
         subnet: 192.168.0.1/24
         gateway: 192.168.0.1
       -
-        subnet: "::ffff:c0a8:1/64"
-        gateway: "::ffff:c0a8:1"
+        subnet: "2001:0db8:85a3:0000:0000:8a2e:0370:7334/64"
+        gateway: "2001:0db8:85a3::1"
