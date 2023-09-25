@@ -16,6 +16,14 @@ services:
       - ./db_proyect/pg_data:/var/lib/postgresql/data:rw
     ports:
       - "5432:5432"
+    deploy:
+      resources:
+        limits:
+          cpus: "0.10"
+          memory: 180M
+        reservations:
+          cpus: "0.1"
+          memory: 128M
   db_manager:
     container_name: db_manager
     image: dpage/pgadmin4
@@ -29,6 +37,14 @@ services:
     depends_on:
       - db_employee
     restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: "0.30"
+          memory: 220M
+        reservations:
+          cpus: "0.1"
+          memory: 128M
   app_publication:
     build: 
       context: ./proyect-employee
@@ -43,4 +59,12 @@ services:
     depends_on:
       - db_employee
     ports:
-      - "3000:3000"  
+      - "3000:3000"
+    deploy:
+      resources:
+        limits:
+          cpus: "0.30"
+          memory: 250M
+        reservations:
+          cpus: "0.1"
+          memory: 128M
