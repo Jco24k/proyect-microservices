@@ -57,7 +57,6 @@ services:
       - .env
     container_name: app_publication
     volumes:
-      - ./proyect-employee/.:/usr/src
       - /usr/src/node_modules
     networks:
       - net_prod
